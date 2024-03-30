@@ -8,131 +8,86 @@
 import UIKit
 
 class ViewController: UIViewController {
-
-    var result=0
+    
     
     @IBOutlet weak var label: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+    }
+
+    @IBAction func buttonPressed(_ sender: UIButton) {
+        let buttonText = (sender.titleLabel?.text)!
+        
+        switch buttonText {
+        case "AC":
+            deleteLabel()
+        case "+/-":
+            print(5)
+        case "%":
+            print(5)
+        case "/":
+            updateLabel(withOperation: buttonText)
+        case "x":
+            updateLabel(withOperation: "*")
+        case "-":
+            updateLabel(withOperation: buttonText)
+        case "+":
+            updateLabel(withOperation: buttonText)
+        case "7":
+            updateLabel(withNumber: buttonText)
+        case "8":
+            updateLabel(withNumber: buttonText)
+        case "9":
+            updateLabel(withNumber: buttonText)
+        case "4":
+            updateLabel(withNumber: buttonText)
+        case "5":
+            updateLabel(withNumber: buttonText)
+        case "6":
+            updateLabel(withNumber: buttonText)
+        case "1":
+            updateLabel(withNumber: buttonText)
+        case "2":
+            updateLabel(withNumber: buttonText)
+        case "3":
+            updateLabel(withNumber: buttonText)
+        case "0":
+            updateLabel(withNumber: buttonText)
+        case ".":
+            addPoint()
+        case "=":
+            calculate()
+        default:
+            print("beklenmedik hata")
+        }
+        
     }
     
-    //Operations
-    @IBAction func buttonAdd(_ sender: Any) {
-        label.text = label.text! + "+"
+    func updateLabel(withNumber string: String){
+        label.text = label.text == "0" ? string : label.text! + string
     }
     
-    @IBAction func buttonSub(_ sender: Any) {
-        label.text = label.text! + "-"
+    func updateLabel(withOperation string: String){
+        label.text = label.text! + string
+        
     }
     
-    @IBAction func buttonMultiplication(_ sender: Any) {
-        label.text = label.text! + "*"
-    }
-    
-    @IBAction func buttonDivision(_ sender: Any) {
-        label.text = label.text! + "/"
-    }
-    
-    @IBAction func buttonAC(_ sender: Any) {
+    func deleteLabel(){
         label.text = "0"
     }
-    @IBAction func buttonEqual(_ sender: Any) {
-        let expressionToEvaluate = NSExpression(format: label.text!)
-            if let result = expressionToEvaluate.expressionValue(with: nil, context: nil) as? NSNumber {
-                label.text = "\(result)"
-            } else {
-                label.text = "Error"
-            }
+    
+    func addPoint() {
+        label.text = label.text == "0" ? "0." : label.text! + "."
     }
     
-    @IBAction func buttonPoint(_ sender: Any) {
-        label.text = label.text! + "."
-    }
-    
-    @IBAction func buttonPercent(_ sender: Any) {
-        //label.text = label.text! + "%"
-    }
-    
-    //Numbers
-    @IBAction func button0(_ sender: Any) {
-        if label.text == "0"{
-           
-        }else{
-            label.text = label.text! + "0"
+    func calculate() {
+        let result = NSExpression(format:label.text!)
+        if let value = result.expressionValue(with: nil, context: nil) {
+            label.text = "\(value)"
         }
     }
     
-    @IBAction func button1(_ sender: Any) {
-        if label.text == "0"{
-            label.text = "1"
-        }else{
-            label.text = label.text! + "1"
-        }
-    }
-    
-    @IBAction func button2(_ sender: Any) {
-        if label.text == "0"{
-            label.text = "2"
-        }else{
-            label.text = label.text! + "2"
-        }
-    }
-    
-    @IBAction func button3(_ sender: Any) {
-        if label.text == "0"{
-            label.text = "3"
-        }else{
-            label.text = label.text! + "3"
-        }
-    }
-    
-    @IBAction func button4(_ sender: Any) {
-        if label.text == "0"{
-            label.text = "4"
-        }else{
-            label.text = label.text! + "4"
-        }
-    }
-    
-    @IBAction func button5(_ sender: Any) {
-        if label.text == "0"{
-            label.text = "5"
-        }else{
-            label.text = label.text! + "5"
-        }
-    }
-    
-    @IBAction func button6(_ sender: Any) {
-        if label.text == "0"{
-            label.text = "6"
-        }else{
-            label.text = label.text! + "6"
-        }
-    }
-    
-    @IBAction func button7(_ sender: Any) {
-        if label.text == "0"{
-            label.text = "7"
-        }else{
-            label.text = label.text! + "7"
-        }
-    }
-    
-    @IBAction func button8(_ sender: Any) {
-        if label.text == "0"{
-            label.text = "8"
-        }else{
-            label.text = label.text! + "8"
-        }
-    }
-    
-    @IBAction func button9(_ sender: Any) {
-        if label.text == "0"{
-            label.text = "9"
-        }else{
-            label.text = label.text! + "9"
-        }
-    }
 }
 
